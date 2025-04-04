@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel</title>
+
+<body>
+
+    <div class="all container">
+
+        <h1 style="font-size:60px; letter-spacing:10px;" id="title"> Control Panel</h1>
+
+        <div id="robotImage">
+            <img src="maxresdefault.jpg" width='300' alt="Robot">
+
+        </div>
+
+        <div class="robotID">
+
+            <input id="nameInput" type="text" placeholder="Robot Name" />
+            <input type="submit" id="SubmitBttn" value="Connect">
+
+        </div>
+
+        <div class="status">
+            <h3 id="statusText">Disconnected</h3>
+        </div>
+
+        <div class="robot_status flexContainer">
+
+            <h3>Status:</h3>
+            <button class="statBtn" id="armedBtn">✅</button>
+            <button class="statBtn" id="disBtn">❌</button>
+            <h4 id="statusModeText"> Armed </h4>
+
+        </div>
+        <br>
+        <div class="controls flexContainer">
+            <h3>Drive:</h3>
+            <button class="dirBtn" id="leftButton">👈</button>
+            <button class="dirBtn" id="forwardButton">⬆️</button>
+            <button class="dirBtn" id="rightButton">👉</button>
+            <button class="dirBtn" id="ManualButton">Ⓜ️</button>
+
+        </div>
+
+        <br>
+
+        <canvas id="robotCanvas" width="600" height="600" style="border:1px solid black;"></canvas>
+
+
+        <div class="mode flexContainer">
+            <h3>Mode:</h3>
+            <button class="modeBtn" id="leftModeButton">L</button>
+            <button class="modeBtn" id="rightModeButton">R</button>
+            <button class="modeBtn" id="centerModeButton">C</button>
+
+        </div>
+
+        <br>
+
+        <div class="driveMode flexContainer">
+
+            <h3>Drive Mode-</h3>
+            <h4 id="driveModeText"> Manual </h4>
+
+        </div>
+
+        <br>
+
+        <div class="timer flexContainer">
+
+            <h3>Timer:</h3>
+            <button class="timerBtn" id="startBtn">Start</button>
+            <button class="timerBtn" id="stopBtn">Stop</button>
+            <h4 id="Clock">00:00:00</h4>
+
+        </div>
+        <br>
+
+        <div class="container">
+
+            <p>Battery Voltage: <strong class="flexItem" id="BattVolt">0</strong></p>
+
+        </div>
+
+        <div class="coordinate">
+            <p>X: <strong class="flexItem" id="valX">0</strong></p>
+            <p>Y: <strong class="flexItem" id="valY">0</strong></p>
+            <p>Yaw: <strong class="flexItem" class="flexItem" id="valYaw">0</strong></p>
+        </div>
+
+        <div class="canvas">
+
+            <canvas id="lidarCanvas" width="500" height="500"></canvas>
+            <div class="ir-sensors-container">
+                <div class="ir-sensor" id="ir-sensor-1">🛩️</div>
+                <div class="ir-sensor" id="ir-sensor-2">🛩️</div>
+                <div class="ir-sensor" id="ir-sensor-3">🛩️</div>
+                <div class="ir-sensor" id="ir-sensor-4">🛩️</div>
+                <div class="ir-sensor" id="ir-sensor-5">🛩️</div>
+                <div class="ir-sensor" id="ir-sensor-6">🛩️</div>
+                <div class="ir-sensor" id="ir-sensor-7">🛩️</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+    <style>
+        body {
+            width: 100%;
+            font-family: 'Times New Roman';
+        }
+
+        .flexContainer {
+            display: flex;
+            justify-content: left;
+        }
+
+        .status {
+            font-size: 20px;
+            color: rgb(255, 0, 0);
+        }
+
+        .all {
+            text-align: center;
+        }
+
+        .dirBtn {
+            font-size: 40px;
+            background-color: transparent;
+            border: none;
+        }
+
+        .statBtn {
+            font-size: 40px;
+            background-color: transparent;
+            border: none;
+        }
+
+        .statBtn:hover {
+            cursor: pointer;
+
+        }
+
+        .modeBtn {
+            font-size: 20px;
+            font-style: italic;
+            background-color: transparent;
+        }
+
+        .modeBtn:hover {
+            cursor: pointer;
+        }
+
+        .dirBtn:hover {
+            cursor: pointer;
+        }
+
+        #clock {
+
+            text-align: center;
+
+        }
+
+        .all {
+            background-color: rgb(210, 210, 210);
+            padding: 10px;
+            width: 80%;
+            margin: auto;
+            border: 5px solid rgb(87, 87, 87);
+            border-radius: 25px;
+        }
+
+        .canvas {
+            margin: auto;
+            border: 5px solid rgb(98, 174, 216);
+            border-radius: 25px;
+            /* display: block;
+        background-color: black; */
+            /* Makes lidar points more visible */
+
+        }
+
+        .ir-sensors-container {
+            position: relative;
+            width: 300px;
+            /* Adjust based on your needs */
+            height: 150px;
+            /* Half-circle */
+            margin: auto;
+        }
+
+        .ir-sensor {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            text-align: center;
+            translate: -50%
+        }
+
+        #ir-sensor-1 {
+            left: 5%;
+            top: -100%;
+        }
+
+        #ir-sensor-2 {
+            left: 20%;
+            top: -120%;
+        }
+
+        #ir-sensor-3 {
+            left: 35%;
+            top: -140%;
+        }
+
+        #ir-sensor-4 {
+            left: 50%;
+            top: -160%;
+        }
+
+        /* Center */
+        #ir-sensor-5 {
+            left: 65%;
+            top: -140%;
+        }
+
+        #ir-sensor-6 {
+            left: 80%;
+            top: -120%;
+        }
+
+        #ir-sensor-7 {
+            left: 95%;
+            top: -100%;
+        }
+    </style>
+
+
+    <script src="roslibjs.js"></script>
+    <!-- <script src="rosScript.js"></script> -->
+
+    <script src="rosScript2.js"></script>
+
+
+</html>
